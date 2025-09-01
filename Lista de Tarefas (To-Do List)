@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Lista de Tarefas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,29 +15,29 @@
             align-items: center;
             height: 100vh;
         }
-        .todo-container {
+        .container-tarefas {
             background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 300px;
         }
-        .todo-container h1 {
+        .container-tarefas h1 {
             text-align: center;
             font-size: 1.5rem;
             margin-bottom: 20px;
         }
-        .todo-input-container {
+        .container-input-tarefa {
             display: flex;
         }
-        .todo-input {
+        .input-tarefa {
             flex: 1;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
             outline: none;
         }
-        .todo-button {
+        .botao-tarefa {
             background-color: #007bff;
             color: white;
             border: none;
@@ -46,15 +46,15 @@
             cursor: pointer;
             margin-left: 10px;
         }
-        .todo-button:hover {
+        .botao-tarefa:hover {
             background-color: #0056b3;
         }
-        .todo-list {
+        .lista-tarefas {
             list-style: none;
             padding: 0;
             margin-top: 20px;
         }
-        .todo-item {
+        .item-tarefa {
             background: #f9f9f9;
             border: 1px solid #ddd;
             border-radius: 4px;
@@ -64,67 +64,64 @@
             justify-content: space-between;
             align-items: center;
         }
-        .todo-item.completed {
+        .item-tarefa.concluido {
             text-decoration: line-through;
             color: #aaa;
         }
-        .todo-actions button {
+        .acoes-tarefa button {
             background: none;
             border: none;
             cursor: pointer;
             margin-left: 10px;
         }
-        .delete-button {
+        .botao-deletar {
             color: red;
         }
     </style>
 </head>
 <body>
-    <div class="todo-container">
-        <h1>To-Do List</h1>
-        <div class="todo-input-container">
-            <input type="text" id="todo-input" class="todo-input" placeholder="Add a new task">
-            <button id="add-todo-button" class="todo-button">Add</button>
+    <div class="container-tarefas">
+        <h1>Lista de Tarefas</h1>
+        <div class="container-input-tarefa">
+            <input type="text" id="input-tarefa" class="input-tarefa" placeholder="Adicione uma nova tarefa">
+            <button id="botao-adicionar-tarefa" class="botao-tarefa">Adicionar</button>
         </div>
-        <ul id="todo-list" class="todo-list"></ul>
+        <ul id="lista-tarefas" class="lista-tarefas"></ul>
     </div>
 
     <script>
-        const todoInput = document.getElementById('todo-input');
-        const addTodoButton = document.getElementById('add-todo-button');
-        const todoList = document.getElementById('todo-list');
+        const inputTarefa = document.getElementById('input-tarefa');
+        const botaoAdicionarTarefa = document.getElementById('botao-adicionar-tarefa');
+        const listaTarefas = document.getElementById('lista-tarefas');
 
-        // Add a new task
-        addTodoButton.addEventListener('click', () => {
-            const taskText = todoInput.value.trim();
+        botaoAdicionarTarefa.addEventListener('click', () => {
+            const textoTarefa = inputTarefa.value.trim();
 
-            if (taskText === '') {
-                alert('Please enter a task.');
+            if (textoTarefa === '') {
+                alert('Por favor, insira uma tarefa.');
                 return;
             }
 
-            const todoItem = document.createElement('li');
-            todoItem.classList.add('todo-item');
-            todoItem.innerHTML = `
-                <span>${taskText}</span>
-                <div class="todo-actions">
-                    <button class="complete-button">✔</button>
-                    <button class="delete-button">✖</button>
+            const itemTarefa = document.createElement('li');
+            itemTarefa.classList.add('item-tarefa');
+            itemTarefa.innerHTML = `
+                <span>${textoTarefa}</span>
+                <div class="acoes-tarefa">
+                    <button class="botao-concluir">✔</button>
+                    <button class="botao-deletar">✖</button>
                 </div>
             `;
 
-            // Mark task as completed
-            todoItem.querySelector('.complete-button').addEventListener('click', () => {
-                todoItem.classList.toggle('completed');
+            itemTarefa.querySelector('.botao-concluir').addEventListener('click', () => {
+                itemTarefa.classList.toggle('concluido');
             });
 
-            // Delete task
-            todoItem.querySelector('.delete-button').addEventListener('click', () => {
-                todoList.removeChild(todoItem);
+            itemTarefa.querySelector('.botao-deletar').addEventListener('click', () => {
+                listaTarefas.removeChild(itemTarefa);
             });
 
-            todoList.appendChild(todoItem);
-            todoInput.value = '';
+            listaTarefas.appendChild(itemTarefa);
+            inputTarefa.value = '';
         });
     </script>
 </body>
